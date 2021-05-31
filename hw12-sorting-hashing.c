@@ -353,28 +353,28 @@ int hashing(int *a, int **ht)//해싱함수
 
 			index = hashcode;//현재 hashcode index로 입력
 
-			while(hashtable[index] != -1)
+			while(hashtable[index] != -1)//비어 있는 버켓을 찾을때 까지 반복한다
 			{
 				index = (++index) % MAX_HASH_TABLE_SIZE;
 				/*
 				printf("index = %d\n", index);
 				*/
 			}
-			hashtable[index] = key;
+			hashtable[index] = key;//비어있는 버켓에 key값을 담는다
 		}
 	}
 
 	return 0;
 }
 
-int search(int *ht, int key)
+int search(int *ht, int key)//탐색하는 함수
 {
-	int index = hashCode(key);
+	int index = hashCode(key);//찾고자하는 key값과 그에 해당하는 hashcode를 index에 넣는다
 
-	if(ht[index] == key)
+	if(ht[index] == key)//만약 key값과 ht[index]값이 일치하면 해당 index를 반환한다
 		return index;
 
-	while(ht[++index] != key)
+	while(ht[++index] != key)//만약 key값과 ht[index]값이 일치하지 않으면 선형조사법으로 찾는다
 	{
 		index = index % MAX_HASH_TABLE_SIZE;
 	}
