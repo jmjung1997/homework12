@@ -47,7 +47,7 @@ int main()
 	int index = -1;
 
 	srand(time(NULL));
-
+	printf("JEONG JAE MIN       2018038067\n\n");
 	do{
 		printf("----------------------------------------------------------------\n");
 		printf("                        Sorting & Hashing                       \n");
@@ -120,7 +120,7 @@ int main()
 	return 1;
 }
 
-int initialize(int** a)
+int initialize(int** a)//초기화 함수
 {
 	int *temp = NULL;
 
@@ -138,29 +138,29 @@ int initialize(int** a)
 	return 0;
 }
 
-int freeArray(int *a)
+int freeArray(int *a)//동적할당 해제함수
 {
 	if(a != NULL)
 		free(a);
 	return 0;
 }
 
-void printArray(int *a)
+void printArray(int *a)//출력함수
 {
-	if (a == NULL) {
+	if (a == NULL) {//아무것도 없을 때
 		printf("nothing to print.\n");
 		return;
 	}
-	for(int i = 0; i < MAX_ARRAY_SIZE; i++)
+	for(int i = 0; i < MAX_ARRAY_SIZE; i++)//해싱함수 key값 출력
 		printf("a[%02d] ", i);
 	printf("\n");
-	for(int i = 0; i < MAX_ARRAY_SIZE; i++)
+	for(int i = 0; i < MAX_ARRAY_SIZE; i++)//해싱함수 bucket값 출력
 		printf("%5d ", a[i]);
 	printf("\n");
 }
 
 
-int selectionSort(int *a)
+int selectionSort(int *a)//선택 정렬 함수
 {
 	int min;
 	int minindex;
@@ -171,20 +171,20 @@ int selectionSort(int *a)
 
 	printArray(a);
 
-	for (i = 0; i < MAX_ARRAY_SIZE; i++)
+	for (i = 0; i < MAX_ARRAY_SIZE; i++)//선택정렬
 	{
-		minindex = i;
-		min = a[i];
+		minindex = i;//minindex 설정
+		min = a[i];//min 값을 정렬 시작하는 초기값으로 지정
 		for(j = i+1; j < MAX_ARRAY_SIZE; j++)
 		{
-			if (min > a[j])
+			if (min > a[j])//만약 기존의 min값 보다 작은값을 발견하면
 			{
-				min = a[j];
-				minindex = j;
+				min = a[j];//현재 index에있는 값을 min으로 지정
+				minindex = j;//현재 index를 minindex로 지정
 			}
 		}
-		a[minindex] = a[i];
-		a[i] = min;
+		a[minindex] = a[i];//초기에 있는 값을 바꾼 index 위치로 이동
+		a[i] = min;//찾은 가장 작은 값을 초기 a[i]로 보낸다
 	}
 
 	printf("----------------------------------------------------------------\n");
@@ -192,7 +192,7 @@ int selectionSort(int *a)
 	return 0;
 }
 
-int insertionSort(int *a)
+int insertionSort(int *a)//삽입정렬 함수
 {
 	int i, j, t;
 
@@ -201,11 +201,11 @@ int insertionSort(int *a)
 
 	printArray(a);
 
-	for(i = 1; i < MAX_ARRAY_SIZE; i++)
+	for(i = 1; i < MAX_ARRAY_SIZE; i++)//MAX_ARRAY_SIZE수만큼 반복
 	{
-		t = a[i];
-		j = i;
-		while (a[j-1] > t && j > 0)
+		t = a[i]; //i의 원소를 t에 대입한다
+		j = i;//현재 시작한 인덱스 i를 j로 한다
+		while (a[j-1] > t && j > 0)//뒤에서 부터 비교해가면서 삽입하는 정렬 형태로 a[j-1]>t이면 j>0일때 까지 반복하면서 앞 쪽 인덱스와 교체 해준다
 		{
 			a[j] = a[j-1];
 			j--;
@@ -219,7 +219,7 @@ int insertionSort(int *a)
 	return 0;
 }
 
-int bubbleSort(int *a)
+int bubbleSort(int *a)//버블 정렬 함수
 {
 	int i, j, t;
 
@@ -228,9 +228,9 @@ int bubbleSort(int *a)
 
 	printArray(a);
 
-	for(i = 0; i < MAX_ARRAY_SIZE; i++)
+	for(i = 0; i < MAX_ARRAY_SIZE; i++)//전체 데이터 갯수만큼 반복
 	{
-		for (j = 0; j < MAX_ARRAY_SIZE; j++)
+		for (j = 0; j < MAX_ARRAY_SIZE; j++)//j=0번째 시작 데이터로하여 오른쪽 옆 데이터와 비교하며 교체한다
 		{
 			if (a[j-1] > a[j])
 			{
@@ -247,7 +247,7 @@ int bubbleSort(int *a)
 	return 0;
 }
 
-int shellSort(int *a)
+int shellSort(int *a)//쉘 정렬
 {
 	int i, j, k, h, v;
 
@@ -256,11 +256,11 @@ int shellSort(int *a)
 
 	printArray(a);
 
-	for (h = MAX_ARRAY_SIZE/2; h > 0; h /= 2)
+	for (h = MAX_ARRAY_SIZE/2; h > 0; h /= 2)//쉘 정렬하는 간격을 h/2를 반복하면서 실행한다
 	{
-		for (i = 0; i < h; i++)
+		for (i = 0; i < h; i++)//
 		{
-			for(j = i + h; j < MAX_ARRAY_SIZE; j += h)
+			for(j = i + h; j < MAX_ARRAY_SIZE; j += h)//삽입정렬과 똑같은 알고리즘으로 간격 h를 두고 부분 삽입 정렬을 한다
 			{
 				v = a[j];
 				k = j;
@@ -279,44 +279,44 @@ int shellSort(int *a)
 	return 0;
 }
 
-int quickSort(int *a, int n)
+int quickSort(int *a, int n)//퀵정렬
 {
 	int v, t;
 	int i, j;
 
-	if (n > 1)
+	if (n > 1)//n이 초과일때
 	{
-		v = a[n-1];
+		v = a[n-1];//피봇을 설정한다
 		i = -1;
 		j = n - 1;
 
 		while(1)
 		{
-			while(a[++i] < v);
-			while(a[--j] > v);
+			while(a[++i] < v);//피봇보다 작은 수
+			while(a[--j] > v);//피봇보다 큰 수
 
-			if (i >= j) break;
-			t = a[i];
+			if (i >= j) break;//low와 high가 엇갈리면 반복을 멈춘다
+			t = a[i];//low와 high가 엇갈리지 않았다면 i와 j를 교체한다
 			a[i] = a[j];
 			a[j] = t;
 		}
-		t = a[i];
+		t = a[i];/*피봇 값을 가운대로 교환한다*/
 		a[i] = a[n-1];
 		a[n-1] = t;
 
-		quickSort(a, i);
-		quickSort(a+i+1, n-i-1);
+		quickSort(a, i);//앞부분 부터 정렬
+		quickSort(a+i+1, n-i-1);//뒷부분 부터 정렬
 	}
 
 
 	return 0;
 }
 
-int hashCode(int key) {
+int hashCode(int key) {//해싱함수에서 key값을 반환해주는 함수
    return key % MAX_HASH_TABLE_SIZE;
 }
 
-int hashing(int *a, int **ht)
+int hashing(int *a, int **ht)//해싱함수
 {
 	int *hashtable = NULL;
 
@@ -328,7 +328,7 @@ int hashing(int *a, int **ht)
 		hashtable = *ht;	/* hash table이 NULL이 아닌경우, table 재활용, reset to -1 */
 	}
 
-	for(int i = 0; i < MAX_HASH_TABLE_SIZE; i++)
+	for(int i = 0; i < MAX_HASH_TABLE_SIZE; i++)//해싱테이블 초기화
 		hashtable[i] = -1;
 
 	/*
@@ -346,12 +346,12 @@ int hashing(int *a, int **ht)
 		/*
 		printf("key = %d, hashcode = %d, hashtable[%d]=%d\n", key, hashcode, hashcode, hashtable[hashcode]);
 		*/
-		if (hashtable[hashcode] == -1)
+		if (hashtable[hashcode] == -1)//해싱테이블 처음으로 데이터 들어갈때
 		{
 			hashtable[hashcode] = key;
-		} else 	{
+		} else 	{//해싱테이블에 충돌이 일어날때
 
-			index = hashcode;
+			index = hashcode;//현재 hashcode index로 입력
 
 			while(hashtable[index] != -1)
 			{
